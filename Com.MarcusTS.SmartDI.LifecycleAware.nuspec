@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Com.MarcusTS.LifecycleAware</id>
+    <version>1.1.0</version>
+    <title>Lifecycle Aware</title>
+    <authors>Stephen Marcus</authors>
+    <owners>Marcus Technical Services, Inc.</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <license type="file">license.txt</license>
+     <description>
+        Lifecycle awareness for Xamarin.Forms.
+    </description>
+    <copyright>Copyright 2019 Marcus Technical Services, Inc. (https://www.marcusts.com)</copyright>
+    <tags>xamarin-forms lifecycle</tags>
+  </metadata>
+</package>

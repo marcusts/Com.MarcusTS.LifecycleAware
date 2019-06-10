@@ -1,11 +1,6 @@
 ﻿// *********************************************************************************
-// Assembly         : Com.MarcusTS.LifecycleAware
-// Author           : Stephen Marcus (Marcus Technical Services, Inc.)
-// Created          : 12-24-2018
-// Last Modified On : 12-24-2018
-//
-// <copyright file="IReportPageLifecycle.cs" company="Marcus Technical Services, Inc.">
-//     Copyright @2018 Marcus Technical Services, Inc.
+// <copyright file=IReportPageLifecycle.cs company="Marcus Technical Services, Inc.">
+//     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
 // MIT License
@@ -31,25 +26,21 @@
 
 namespace Com.MarcusTS.LifecycleAware.Common.Interfaces
 {
-   using SharedUtils.Utils;
+   using Com.MarcusTS.SharedUtils.Utils;
 
    /// <summary>
-   /// Interface IReportPageLifecycle
+   ///    Interface IReportPageLifecycle
    /// </summary>
    public interface IReportPageLifecycle
    {
-      #region Public Events
-
       /// <summary>
-      /// Occurs when [page is appearing].
+      ///    Occurs when [page is appearing].
       /// </summary>
       event EventUtils.GenericDelegate<object> PageIsAppearing;
 
       /// <summary>
-      /// Occurs when [page is disappearing].
+      ///    Occurs when [page is disappearing].
       /// </summary>
       event EventUtils.GenericDelegate<object> PageIsDisappearing;
-
-      #endregion Public Events
    }
 }

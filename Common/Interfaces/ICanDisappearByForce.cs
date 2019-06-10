@@ -1,11 +1,6 @@
 ﻿// *********************************************************************************
-// Assembly         : Com.MarcusTS.LifecycleAware
-// Author           : Stephen Marcus (Marcus Technical Services, Inc.)
-// Created          : 12-27-2018
-// Last Modified On : 12-27-2018
-//
-// <copyright file="ICanDisappearByForce.cs" company="Marcus Technical Services, Inc.">
-//     Copyright @2018 Marcus Technical Services, Inc.
+// <copyright file=ICanDisappearByForce.cs company="Marcus Technical Services, Inc.">
+//     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
 // MIT License
@@ -28,20 +23,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 // *********************************************************************************
+
 namespace Com.MarcusTS.LifecycleAware.Common.Interfaces
 {
    /// <summary>
-   /// Interface ICanDisappearByForce
+   ///    Interface ICanDisappearByForce
    /// </summary>
    public interface ICanDisappearByForce
    {
-      #region Public Methods
-
       /// <summary>
-      /// Forces the disappearing.
+      ///    Forces the disappearing.
       /// </summary>
       void ForceDisappearing();
-
-      #endregion Public Methods
    }
 }

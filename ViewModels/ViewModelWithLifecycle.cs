@@ -1,11 +1,6 @@
 ﻿// *********************************************************************************
-// Assembly         : Com.MarcusTS.LifecycleAware
-// Author           : Stephen Marcus (Marcus Technical Services, Inc.)
-// Created          : 12-24-2018
-// Last Modified On : 12-24-2018
-//
-// <copyright file="ViewModelWithLifecycle.cs" company="Marcus Technical Services, Inc.">
-//     Copyright @2018 Marcus Technical Services, Inc.
+// <copyright file=ViewModelWithLifecycle.cs company="Marcus Technical Services, Inc.">
+//     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
 // MIT License
@@ -31,24 +26,28 @@
 
 namespace Com.MarcusTS.LifecycleAware.ViewModels
 {
+   using Com.MarcusTS.LifecycleAware.Common.Interfaces;
+   using Com.MarcusTS.LifecycleAware.Common.Utils;
+   using System;
    using System.ComponentModel;
    using System.Runtime.CompilerServices;
-   using Common.Interfaces;
-   using Common.Utils;
-   using SharedUtils.Utils;
 
    /// <summary>
-   /// Interface IViewModelWithLifecycle
-   /// Implements the <see cref="System.ComponentModel.INotifyPropertyChanged" />
-   /// Implements the <see cref="INotifyPropertyChanged" />
-   /// Implements the <see cref="System.ComponentModel" />
-   /// Implements the <see cref="System" />
-   /// Implements the <see cref="System.ComponentModel.INotifyPropertyChanged" />
-   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostAppLifecycleReporter" />
-   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostPageLifecycleReporter" />
-   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.ICleanUpBeforeFinalization" />
-   /// Implements the <see cref="INotifyPropertyChanged" />
+   ///    Interface IViewModelWithLifecycle
+   ///    Implements the <see cref="System.ComponentModel.INotifyPropertyChanged" />
+   ///    Implements the <see cref="INotifyPropertyChanged" />
+   ///    Implements the <see cref="System.ComponentModel" />
+   ///    Implements the <see cref="System" />
+   ///    Implements the <see cref="System.ComponentModel.INotifyPropertyChanged" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostAppLifecycleReporter" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostPageLifecycleReporter" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.ICleanUpBeforeFinalization" />
+   ///    Implements the <see cref="INotifyPropertyChanged" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostStageLifecycleReporter" />
+   ///    Implements the <see cref="System.IDisposable" />
    /// </summary>
+   /// <seealso cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostStageLifecycleReporter" />
+   /// <seealso cref="System.IDisposable" />
    /// <seealso cref="INotifyPropertyChanged" />
    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
    /// <seealso cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostAppLifecycleReporter" />
@@ -59,111 +58,64 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
    /// <seealso cref="IHostPageLifecycleReporter" />
    /// <seealso cref="IHostPageLifecycleReporter" />
    public interface IViewModelWithLifecycle : INotifyPropertyChanged, IHostAppLifecycleReporter,
-                                              IHostPageLifecycleReporter, ICleanUpBeforeFinalization
-   { }
+                                              IHostStageLifecycleReporter,
+                                              IHostPageLifecycleReporter, ICleanUpBeforeFinalization, IDisposable
+   {
+   }
 
    /// <summary>
-   /// Use this as the basis of all view models if possible. If not possible in a few cases, copy this code into your
-   /// other classes as-is and it will work the same way.
-   /// Implements the <see cref="IViewModelWithLifecycle" />
-   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.ViewModels.IViewModelWithLifecycle" />
-   /// Implements the <see cref="object" />
+   ///    Use this as the basis of all view models if possible. If not possible in a few cases, copy this code into your
+   ///    other classes as-is and it will work the same way.
+   ///    Implements the <see cref="IViewModelWithLifecycle" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.ViewModels.IViewModelWithLifecycle" />
+   ///    Implements the <see cref="object" />
    /// </summary>
    /// <seealso cref="object" />
    /// <seealso cref="Com.MarcusTS.LifecycleAware.ViewModels.IViewModelWithLifecycle" />
    /// <seealso cref="IViewModelWithLifecycle" />
-   /// <remarks>REMEMBER to set the <see cref="AppLifecycleReporter" /> to the current app and the
-   /// <see cref="PageLifecycleReporter" /> to the parent page. The event ties are weak and non-binding.</remarks>
+   /// <remarks>
+   ///    REMEMBER to set the <see cref="AppLifecycleReporter" /> to the current app and the
+   ///    <see cref="PageLifecycleReporter" /> to the parent page. The event ties are weak and non-binding.
+   /// </remarks>
    public class ViewModelWithLifecycle : IViewModelWithLifecycle
    {
-      #region Public Events
-
       /// <summary>
-      /// Occurs when [property changed].
-      /// </summary>
-      public event PropertyChangedEventHandler PropertyChanged;
-
-      #endregion Public Events
-
-      #region Private Destructors
-
-      /// <summary>
-      /// Finalizes an instance of the <see cref="ViewModelWithLifecycle" /> class.
-      /// </summary>
-      ~ViewModelWithLifecycle()
-      {
-         if (!IsCleaningUpBeforeFinalization)
-         {
-            IsCleaningUpBeforeFinalization = true;
-         }
-      }
-
-      #endregion Private Destructors
-
-      #region Private Fields
-
-      /// <summary>
-      /// The application lifecycle reporter
+      ///    The application lifecycle reporter
       /// </summary>
       private IReportAppLifecycle _appLifecycleReporter;
 
       /// <summary>
-      /// The is cleaning up
+      ///    The is cleaning up
       /// </summary>
       private bool _isCleaningUp;
 
       /// <summary>
-      /// The page lifecycle reporter
+      ///    The page lifecycle reporter
       /// </summary>
       private IReportPageLifecycle _pageLifecycleReporter;
 
-      #endregion Private Fields
-
-      #region Public Properties
+      /// <summary>
+      ///    The stage lifecycle reporter
+      /// </summary>
+      private IReportStageLifecycle _stageLifecycleReporter;
 
       /// <summary>
-      /// Gets or sets the application lifecycle reporter.
+      ///    Occurs when [property changed].
+      /// </summary>
+      public event PropertyChangedEventHandler PropertyChanged;
+
+      /// <summary>
+      ///    Gets or sets the application lifecycle reporter.
       /// </summary>
       /// <value>The application lifecycle reporter.</value>
       public IReportAppLifecycle AppLifecycleReporter
       {
          get => _appLifecycleReporter;
-         set
-         {
-            _appLifecycleReporter = value;
-
-            if (_appLifecycleReporter != null)
-            {
-               this.SetAnyHandler
-                  (
-                   handler => _appLifecycleReporter.AppIsStarting += OnAppStarting,
-                   handler => _appLifecycleReporter.AppIsStarting -= OnAppStarting,
-                   (lifecycle,
-                    args) =>
-                   { }
-                  );
-               this.SetAnyHandler
-                  (
-                   handler => _appLifecycleReporter.AppIsGoingToSleep += OnAppGoingToSleep,
-                   handler => _appLifecycleReporter.AppIsGoingToSleep -= OnAppGoingToSleep,
-                   (lifecycle,
-                    args) =>
-                   { }
-                  );
-               this.SetAnyHandler
-                  (
-                   handler => _appLifecycleReporter.AppIsResuming     += OnAppResuming,
-                   handler => _appLifecycleReporter.AppIsGoingToSleep -= OnAppResuming,
-                   (lifecycle,
-                    args) =>
-                   { }
-                  );
-            }
-         }
+         set => this.SetAppLifecycleReporter(ref _appLifecycleReporter, value);
       }
 
       /// <summary>
-      /// Gets or sets a value indicating whether this instance is cleaning up before finalization.
+      ///    Gets or sets a value indicating whether this instance is cleaning up before finalization.
       /// </summary>
       /// <value><c>true</c> if this instance is cleaning up before finalization; otherwise, <c>false</c>.</value>
       public bool IsCleaningUpBeforeFinalization
@@ -187,76 +139,152 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      /// Gets or sets the page lifecycle reporter.
+      ///    Gets or sets the page lifecycle reporter.
       /// </summary>
       /// <value>The page lifecycle reporter.</value>
       public IReportPageLifecycle PageLifecycleReporter
       {
          get => _pageLifecycleReporter;
-         set
+         set => this.SetPageLifecycleReporter(ref _pageLifecycleReporter, value);
+      }
+
+      /// <summary>
+      ///    Gets or sets the stage lifecycle reporter.
+      /// </summary>
+      /// <value>The stage lifecycle reporter.</value>
+      public IReportStageLifecycle StageLifecycleReporter
+      {
+         get => _stageLifecycleReporter;
+         set => this.SetStageLifecycleReporter(ref _stageLifecycleReporter, value);
+      }
+
+      /// <summary>
+      ///    Disposes this instance.
+      /// </summary>
+      public void Dispose()
+      {
+         Dispose(true);
+         GC.SuppressFinalize(this);
+      }
+
+      /// <summary>
+      ///    Called when [page appearing].
+      /// </summary>
+      /// <exception cref="NotImplementedException"></exception>
+      public virtual void OnPageAppearing()
+      {
+      }
+
+      /// <summary>
+      ///    Called when [page disappearing].
+      /// </summary>
+      /// <exception cref="NotImplementedException"></exception>
+      public virtual void OnPageDisappearing()
+      {
+      }
+
+      /// <summary>
+      ///    Called when [stage appearing].
+      /// </summary>
+      public virtual void OnStageAppearing()
+      {
+      }
+
+      /// <summary>
+      ///    Called when [stage disappearing].
+      /// </summary>
+      public virtual void OnStageDisappearing()
+      {
+      }
+
+      /// <summary>
+      ///    Called when [application resuming].
+      /// </summary>
+      void IHostAppLifecycleReporter.OnAppResuming()
+      {
+         OnAppResuming();
+      }
+
+      /// <summary>
+      ///    Called when [application starting].
+      /// </summary>
+      void IHostAppLifecycleReporter.OnAppStarting()
+      {
+         OnAppStarting();
+      }
+
+      /// <summary>
+      ///    Called when [application going to sleep].
+      /// </summary>
+      void IHostAppLifecycleReporter.OnAppGoingToSleep()
+      {
+         OnAppGoingToSleep();
+      }
+
+      /// <summary>
+      ///    Finalizes an instance of the <see cref="ViewModelWithLifecycle" /> class.
+      /// </summary>
+      ~ViewModelWithLifecycle()
+      {
+         if (!IsCleaningUpBeforeFinalization)
          {
-            _pageLifecycleReporter = value;
-
-            if (_pageLifecycleReporter != null)
-            {
-               this.SetAnyHandler
-                  (
-                   handler => _pageLifecycleReporter.PageIsDisappearing += OnPageDisappearing,
-                   handler => _pageLifecycleReporter.PageIsDisappearing -= OnPageDisappearing,
-                   (lifecycle,
-                    args) =>
-                   { }
-                  );
-
-               this.SetAnyHandler
-                  (
-                   handler => _pageLifecycleReporter.PageIsAppearing += OnPageAppearing,
-                   handler => _pageLifecycleReporter.PageIsAppearing -= OnPageAppearing,
-                   (lifecycle,
-                    args) =>
-                   { }
-                  );
-            }
+            IsCleaningUpBeforeFinalization = true;
          }
       }
 
-      #endregion Public Properties
-
-      #region Protected Methods
+      /// <summary>
+      ///    Releases unmanaged and - optionally - managed resources.
+      /// </summary>
+      /// <param name="disposing">
+      ///    <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+      ///    unmanaged resources.
+      /// </param>
+      protected virtual void Dispose(bool disposing)
+      {
+         ReleaseUnmanagedResources();
+         if (disposing)
+         {
+         }
+      }
 
       /// <summary>
-      /// Called when [application going to sleep].
+      ///    Called when [application going to sleep].
       /// </summary>
       protected virtual void OnAppGoingToSleep()
-      { }
+      {
+      }
 
       /// <summary>
-      /// Called when [application resuming].
+      ///    Called when [application resuming].
       /// </summary>
       protected virtual void OnAppResuming()
-      { }
+      {
+      }
 
       /// <summary>
-      /// Called when [application starting].
+      ///    Called when [application starting].
       /// </summary>
       protected virtual void OnAppStarting()
-      { }
+      {
+      }
 
       /// <summary>
-      /// Called when [is cleaning up before finalization].
+      ///    Called when [is cleaning up before finalization].
       /// </summary>
       protected virtual void OnIsCleaningUpBeforeFinalization()
-      { }
+      {
+      }
 
       /// <summary>
-      /// Called when [page appearing].
+      ///    Called when [page appearing].
       /// </summary>
       /// <param name="val">The value.</param>
       protected virtual void OnPageAppearing(object val)
-      { }
+      {
+      }
 
       /// <summary>
-      /// Called when [page disappearing].
+      ///    Called when [page disappearing].
       /// </summary>
       /// <param name="val">The value.</param>
       protected virtual void OnPageDisappearing(object val)
@@ -265,7 +293,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      /// Called when [property changed].
+      ///    Called when [property changed].
       /// </summary>
       /// <param name="propertyName">Name of the property.</param>
       protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -273,6 +301,11 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
       }
 
-      #endregion Protected Methods
+      /// <summary>
+      ///    Releases the unmanaged resources.
+      /// </summary>
+      protected virtual void ReleaseUnmanagedResources()
+      {
+      }
    }
 }

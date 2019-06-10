@@ -1,5 +1,5 @@
 ﻿// *********************************************************************************
-// <copyright file=IHostAppLifecycleReporter.cs company="Marcus Technical Services, Inc.">
+// <copyright file=IReportStageLifecycle.cs company="Marcus Technical Services, Inc.">
 //     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
@@ -26,30 +26,31 @@
 
 namespace Com.MarcusTS.LifecycleAware.Common.Interfaces
 {
+   using Com.MarcusTS.SharedUtils.Utils;
+
    /// <summary>
-   ///    Interface IHostAppLifecycleReporter
+   ///    Interface IReportStageLifecycle
    /// </summary>
-   public interface IHostAppLifecycleReporter
+   public interface IReportStageLifecycle
    {
       /// <summary>
-      ///    Gets or sets the application lifecycle reporter.
+      ///    Occurs when [stage is appearing].
       /// </summary>
-      /// <value>The application lifecycle reporter.</value>
-      IReportAppLifecycle AppLifecycleReporter { get; set; }
+      event EventUtils.GenericDelegate<object> StageIsAppearing;
 
       /// <summary>
-      ///    Called when [application going to sleep].
+      ///    Occurs when [stage is disappearing].
       /// </summary>
-      void OnAppGoingToSleep();
+      event EventUtils.GenericDelegate<object> StageIsDisappearing;
 
       /// <summary>
-      ///    Called when [application resuming].
+      ///    Raises the is appearing.
       /// </summary>
-      void OnAppResuming();
+      void RaiseIsAppearing();
 
       /// <summary>
-      ///    Called when [application starting].
+      ///    Raises the is disappearing.
       /// </summary>
-      void OnAppStarting();
+      void RaiseIsDisappearing();
    }
 }

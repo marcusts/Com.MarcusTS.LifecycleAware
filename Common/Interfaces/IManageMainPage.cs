@@ -1,5 +1,5 @@
 ﻿// *********************************************************************************
-// <copyright file=IHostAppLifecycleReporter.cs company="Marcus Technical Services, Inc.">
+// <copyright file=IManageMainPage.cs company="Marcus Technical Services, Inc.">
 //     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
@@ -26,30 +26,17 @@
 
 namespace Com.MarcusTS.LifecycleAware.Common.Interfaces
 {
+   using Xamarin.Forms;
+
    /// <summary>
-   ///    Interface IHostAppLifecycleReporter
+   ///    Interface IManageMainPage
    /// </summary>
-   public interface IHostAppLifecycleReporter
+   public interface IManageMainPage
    {
       /// <summary>
-      ///    Gets or sets the application lifecycle reporter.
+      ///    Gets or sets the main page.
       /// </summary>
-      /// <value>The application lifecycle reporter.</value>
-      IReportAppLifecycle AppLifecycleReporter { get; set; }
-
-      /// <summary>
-      ///    Called when [application going to sleep].
-      /// </summary>
-      void OnAppGoingToSleep();
-
-      /// <summary>
-      ///    Called when [application resuming].
-      /// </summary>
-      void OnAppResuming();
-
-      /// <summary>
-      ///    Called when [application starting].
-      /// </summary>
-      void OnAppStarting();
+      /// <value>The main page.</value>
+      Page MainPage { get; set; }
    }
 }

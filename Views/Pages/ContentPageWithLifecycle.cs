@@ -1,11 +1,6 @@
 ﻿// *********************************************************************************
-// Assembly         : Com.MarcusTS.LifecycleAware
-// Author           : Stephen Marcus (Marcus Technical Services, Inc.)
-// Created          : 12-24-2018
-// Last Modified On : 12-27-2018
-//
-// <copyright file="ContentPageWithLifecycle.cs" company="Marcus Technical Services, Inc.">
-//     Copyright @2018 Marcus Technical Services, Inc.
+// <copyright file=ContentPageWithLifecycle.cs company="Marcus Technical Services, Inc.">
+//     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
 // MIT License
@@ -31,40 +26,44 @@
 
 namespace Com.MarcusTS.LifecycleAware.Views.Pages
 {
+   using Com.MarcusTS.LifecycleAware.Common.Interfaces;
+   using Com.MarcusTS.LifecycleAware.Common.Utils;
+   using Com.MarcusTS.SharedForms.Common.Utils;
+   using Com.MarcusTS.SharedUtils.Utils;
    using System;
-   using Common.Interfaces;
-   using Common.Utils;
-   using SharedForms.Utils;
-   using SharedUtils.Utils;
-   using SubViews;
-   using ViewModels;
    using Xamarin.Forms;
 
    /// <summary>
-   /// Interface IContentPageWithLifecycle
-   /// Implements the <see cref="IHostAppLifecycleReporter" />
-   /// Implements the <see cref="IHostAppLifecycleReporter" />
-   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostAppLifecycleReporter" />
-   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IReportPageLifecycle" />
-   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.ICanDisappearByForce" />
+   ///    Interface IContentPageWithLifecycle
+   ///    Implements the <see cref="IHostAppLifecycleReporter" />
+   ///    Implements the <see cref="IHostAppLifecycleReporter" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostAppLifecycleReporter" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IReportPageLifecycle" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.ICanDisappearByForce" />
+   ///    Implements the <see cref="System.IDisposable" />
    /// </summary>
+   /// <seealso cref="System.IDisposable" />
    /// <seealso cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.ICanDisappearByForce" />
    /// <seealso cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostAppLifecycleReporter" />
    /// <seealso cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IReportPageLifecycle" />
    /// <seealso cref="IReportPageLifecycle" />
    /// <seealso cref="IReportPageLifecycle" />
-   /// <remarks>WARNING: .Net does not provide IContentPage, so references to this interface type *must* type-cast to
-   /// ContentPage_LCA manually.</remarks>
-   public interface IContentPageWithLifecycle : IHostAppLifecycleReporter, IReportPageLifecycle, ICanDisappearByForce
-   { }
+   /// <remarks>
+   ///    WARNING: .Net does not provide IContentPage, so references to this interface type *must* type-cast to
+   ///    ContentPage_LCA manually.
+   /// </remarks>
+   public interface IContentPageWithLifecycle : IHostAppLifecycleReporter, IReportPageLifecycle, ICanDisappearByForce,
+                                                IDisposable
+   {
+   }
 
    /// <summary>
-   /// Use this as the basis of all pages if possible. If not possible in a few cases, copy this code into your other
-   /// classes as-is and it will work the same way.
-   /// Implements the <see cref="Xamarin.Forms.ContentPage" />
-   /// Implements the <see cref="IContentPageWithLifecycle" />
-   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Views.Pages.IContentPageWithLifecycle" />
-   /// Implements the <see cref="ContentPage" />
+   ///    Use this as the basis of all pages if possible. If not possible in a few cases, copy this code into your other
+   ///    classes as-is and it will work the same way.
+   ///    Implements the <see cref="Xamarin.Forms.ContentPage" />
+   ///    Implements the <see cref="IContentPageWithLifecycle" />
+   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Views.Pages.IContentPageWithLifecycle" />
+   ///    Implements the <see cref="ContentPage" />
    /// </summary>
    /// <seealso cref="ContentPage" />
    /// <seealso cref="Com.MarcusTS.LifecycleAware.Views.Pages.IContentPageWithLifecycle" />
@@ -72,133 +71,122 @@ namespace Com.MarcusTS.LifecycleAware.Views.Pages
    /// <seealso cref="IContentPageWithLifecycle" />
    public class ContentPageWithLifecycle : ContentPage, IContentPageWithLifecycle
    {
-      #region Public Fields
-
       /// <summary>
-      /// The application lifecycle reporter property
+      ///    The application lifecycle reporter property
       /// </summary>
       public static BindableProperty AppLifecycleReporterProperty =
          CreateContentPageWithLifecycleBindableProperty
+         (
+            nameof(AppLifecycleReporter),
+            default(IReportAppLifecycle),
+            BindingMode.OneWay,
             (
-             nameof(AppLifecycleReporter),
-             default(IReportAppLifecycle),
-             BindingMode.OneWay,
-             (contentView,
-              oldVal,
-              newVal) =>
-             {
-                contentView.AppLifecycleReporter = newVal;
-             }
-            );
-
-      #endregion Public Fields
-
-      #region Private Fields
+               contentView,
+               oldVal,
+               newVal
+            ) =>
+            {
+               contentView.AppLifecycleReporter = newVal;
+            }
+         );
 
       /// <summary>
-      /// The application lifecycle reporter
+      ///    The application lifecycle reporter
       /// </summary>
       private IReportAppLifecycle _appLifecycleReporter;
 
-      #endregion Private Fields
-
-      #region Public Constructors
-
       /// <summary>
-      /// Initializes a new instance of the <see cref="ContentPageWithLifecycle" /> class.
+      ///    Initializes a new instance of the <see cref="ContentPageWithLifecycle" /> class.
       /// </summary>
       public ContentPageWithLifecycle()
       {
-         BindingContextChanged += (sender,
-                                   args) =>
-                                  {
-                                     if (BindingContext is IViewModelWithLifecycle
-                                            bindingContextAsViewModelWithLifecycle)
-                                     {
-                                        bindingContextAsViewModelWithLifecycle.PageLifecycleReporter = this;
-                                     }
-                                  };
+         this.SetBindingContextLifecycleReporters();
       }
 
-      #endregion Public Constructors
+      /// <summary>
+      ///    Gets or sets the view that contains the content of the Page.
+      /// </summary>
+      /// <value>A <see cref="T:Xamarin.Forms.View" /> subclass, or <see langword="null" />.</value>
+      /// <remarks>To be added.</remarks>
+      public new View Content
+      {
+         get => base.Content;
+         set
+         {
+            base.Content = value;
 
-      #region Public Properties
+            SetUpNewContent();
+         }
+      }
 
       /// <summary>
-      /// Gets or sets the application lifecycle reporter.
+      ///    Occurs when [page is appearing].
+      /// </summary>
+      public event EventUtils.GenericDelegate<object> PageIsAppearing;
+
+      /// <summary>
+      ///    Occurs when [page is disappearing].
+      /// </summary>
+      public event EventUtils.GenericDelegate<object> PageIsDisappearing;
+
+      /// <summary>
+      ///    Gets or sets the application lifecycle reporter.
       /// </summary>
       /// <value>The application lifecycle reporter.</value>
       public IReportAppLifecycle AppLifecycleReporter
       {
          get => _appLifecycleReporter;
-         set
-         {
-            _appLifecycleReporter = value;
-
-            if (_appLifecycleReporter != null)
-            {
-               this.SetAnyHandler
-                  (
-                   handler => _appLifecycleReporter.AppIsStarting += OnAppStarting,
-                   handler => _appLifecycleReporter.AppIsStarting -= OnAppStarting,
-                   (lifecycle,
-                    args) =>
-                   { }
-                  );
-               this.SetAnyHandler
-                  (
-                   handler => _appLifecycleReporter.AppIsGoingToSleep += OnAppGoingToSleep,
-                   handler => _appLifecycleReporter.AppIsGoingToSleep -= OnAppGoingToSleep,
-                   (lifecycle,
-                    args) =>
-                   { }
-                  );
-               this.SetAnyHandler
-                  (
-                   handler => _appLifecycleReporter.AppIsResuming     += OnAppResuming,
-                   handler => _appLifecycleReporter.AppIsGoingToSleep -= OnAppResuming,
-                   (lifecycle,
-                    args) =>
-                   { }
-                  );
-            }
-         }
+         set => this.SetAppLifecycleReporter(ref _appLifecycleReporter, value);
       }
 
-      #endregion Public Properties
-
-      #region Private Methods
-
       /// <summary>
-      /// Disappears this instance.
+      ///    Disposes this instance.
       /// </summary>
-      private void Disappear()
+      public void Dispose()
       {
-         PageIsDisappearing?.Invoke(this);
-
-         this.SendObjectDisappearingMessage();
+         Dispose(true);
+         GC.SuppressFinalize(this);
       }
 
-      #endregion Private Methods
-
-      #region Public Events
-
       /// <summary>
-      /// Occurs when [page is appearing].
+      ///    Forces the disappearing.
       /// </summary>
-      public event EventUtils.GenericDelegate<object> PageIsAppearing;
+      public void ForceDisappearing()
+      {
+         Disappear();
+      }
 
       /// <summary>
-      /// Occurs when [page is disappearing].
+      ///    Called when [application going to sleep].
       /// </summary>
-      public event EventUtils.GenericDelegate<object> PageIsDisappearing;
-
-      #endregion Public Events
-
-      #region Public Methods
+      public virtual void OnAppGoingToSleep()
+      {
+      }
 
       /// <summary>
-      /// Creates the content page with lifecycle bindable property.
+      ///    Called when [application resuming].
+      /// </summary>
+      public virtual void OnAppResuming()
+      {
+      }
+
+      /// <summary>
+      ///    Called when [application starting].
+      /// </summary>
+      public virtual void OnAppStarting()
+      {
+      }
+
+      /// <summary>
+      ///    Finalizes an instance of the <see cref="ContentPageWithLifecycle" /> class.
+      /// </summary>
+      ~ContentPageWithLifecycle()
+      {
+         Dispose(false);
+      }
+
+      /// <summary>
+      ///    Creates the content page with lifecycle bindable property.
       /// </summary>
       /// <typeparam name="PropertyTypeT">The type of the property type t.</typeparam>
       /// <param name="localPropName">Name of the local property.</param>
@@ -206,77 +194,45 @@ namespace Com.MarcusTS.LifecycleAware.Views.Pages
       /// <param name="bindingMode">The binding mode.</param>
       /// <param name="callbackAction">The callback action.</param>
       /// <returns>BindableProperty.</returns>
-      public static BindableProperty CreateContentPageWithLifecycleBindableProperty<PropertyTypeT>(string localPropName,
-                                                                                                   PropertyTypeT
-                                                                                                      defaultVal =
-                                                                                                      default(
-                                                                                                         PropertyTypeT),
-                                                                                                   BindingMode
-                                                                                                      bindingMode =
-                                                                                                      BindingMode
-                                                                                                        .OneWay,
-                                                                                                   Action<
-                                                                                                         ContentPageWithLifecycle
-                                                                                                       , PropertyTypeT,
-                                                                                                         PropertyTypeT>
-                                                                                                      callbackAction =
-                                                                                                      null)
+      public static BindableProperty CreateContentPageWithLifecycleBindableProperty<PropertyTypeT>
+      (
+         string localPropName,
+         PropertyTypeT
+            defaultVal =
+            default,
+         BindingMode
+            bindingMode =
+            BindingMode
+               .OneWay,
+         Action<
+               ContentPageWithLifecycle
+             , PropertyTypeT,
+               PropertyTypeT>
+            callbackAction =
+            null
+      )
       {
          return BindableUtils.CreateBindableProperty(localPropName, defaultVal, bindingMode, callbackAction);
       }
 
       /// <summary>
-      /// Creates the view for page.
+      ///    Releases unmanaged and - optionally - managed resources.
       /// </summary>
-      /// <param name="viewCreator">The view creator.</param>
-      /// <param name="viewModelCreator">The view model creator.</param>
-      /// <returns>View.</returns>
-      /// <exception cref="ArgumentException">viewCreator</exception>
-      /// <exception cref="System.ArgumentException">viewCreator</exception>
-      public View CreateViewForPage(Func<ContentViewWithLifecycle> viewCreator,
-                                    Func<ViewModelWithLifecycle>   viewModelCreator = null)
+      /// <param name="disposing">
+      ///    <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+      ///    unmanaged resources.
+      /// </param>
+      protected virtual void Dispose(bool disposing)
       {
-         if (viewCreator == null)
+         ReleaseUnmanagedResources();
+         if (disposing)
          {
-            throw new ArgumentException(nameof(viewCreator) + " must be supplied");
          }
-
-         var returnView = viewCreator();
-
-         if (returnView is IHostAppLifecycleReporter returnViewAsAppLifecycleReporter)
-         {
-            returnViewAsAppLifecycleReporter.AppLifecycleReporter = AppLifecycleReporter;
-         }
-
-         if (viewModelCreator != null)
-         {
-            var viewModel = viewModelCreator();
-            viewModel.PageLifecycleReporter = this;
-
-            if (viewModel is IHostAppLifecycleReporter viewModelAsAppLifecycleReporter)
-            {
-               viewModelAsAppLifecycleReporter.AppLifecycleReporter = AppLifecycleReporter;
-            }
-         }
-
-         return returnView;
       }
 
       /// <summary>
-      /// Forces the disappearing.
-      /// </summary>
-      public void ForceDisappearing()
-      {
-         Disappear();
-      }
-
-      #endregion Public Methods
-
-      #region Protected Methods
-
-      /// <summary>
-      /// When overridden, allows application developers to customize behavior immediately prior to the
-      /// <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+      ///    When overridden, allows application developers to customize behavior immediately prior to the
+      ///    <see cref="T:Xamarin.Forms.Page" /> becoming visible.
       /// </summary>
       /// <remarks>To be added.</remarks>
       protected override void OnAppearing()
@@ -287,25 +243,7 @@ namespace Com.MarcusTS.LifecycleAware.Views.Pages
       }
 
       /// <summary>
-      /// Called when [application going to sleep].
-      /// </summary>
-      protected virtual void OnAppGoingToSleep()
-      { }
-
-      /// <summary>
-      /// Called when [application resuming].
-      /// </summary>
-      protected virtual void OnAppResuming()
-      { }
-
-      /// <summary>
-      /// Called when [application starting].
-      /// </summary>
-      protected virtual void OnAppStarting()
-      { }
-
-      /// <summary>
-      /// Called when [disappearing].
+      ///    Called when [disappearing].
       /// </summary>
       /// <remarks>To be added.</remarks>
       protected override void OnDisappearing()
@@ -315,6 +253,30 @@ namespace Com.MarcusTS.LifecycleAware.Views.Pages
          Disappear();
       }
 
-      #endregion Protected Methods
+      /// <summary>
+      ///    Sets up new content.
+      /// </summary>
+      protected virtual void SetUpNewContent()
+      {
+         base.Content.SetLifecycleReporters(this);
+      }
+
+      /// <summary>
+      ///    Disappears this instance.
+      /// </summary>
+      private void Disappear()
+      {
+         PageIsDisappearing?.Invoke(this);
+
+         this.SendObjectDisappearingMessage();
+      }
+
+      /// <summary>
+      ///    Releases the unmanaged resources.
+      /// </summary>
+      private void ReleaseUnmanagedResources()
+      {
+         // TODO release unmanaged resources here
+      }
    }
 }

@@ -1,11 +1,6 @@
 ﻿// *********************************************************************************
-// Assembly         : Com.MarcusTS.LifecycleAware
-// Author           : Stephen Marcus (Marcus Technical Services, Inc.)
-// Created          : 12-24-2018
-// Last Modified On : 12-24-2018
-//
-// <copyright file="ICleanUpBeforeFinalization.cs" company="Marcus Technical Services, Inc.">
-//     Copyright @2018 Marcus Technical Services, Inc.
+// <copyright file=ICleanUpBeforeFinalization.cs company="Marcus Technical Services, Inc.">
+//     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
 // MIT License
@@ -32,18 +27,14 @@
 namespace Com.MarcusTS.LifecycleAware.Common.Interfaces
 {
    /// <summary>
-   /// Interface ICleanUpBeforeFinalization
+   ///    Interface ICleanUpBeforeFinalization
    /// </summary>
    public interface ICleanUpBeforeFinalization
    {
-      #region Public Properties
-
       /// <summary>
-      /// Gets or sets a value indicating whether this instance is cleaning up before finalization.
+      ///    Gets or sets a value indicating whether this instance is cleaning up before finalization.
       /// </summary>
       /// <value><c>true</c> if this instance is cleaning up before finalization; otherwise, <c>false</c>.</value>
       bool IsCleaningUpBeforeFinalization { get; set; }
-
-      #endregion Public Properties
    }
 }

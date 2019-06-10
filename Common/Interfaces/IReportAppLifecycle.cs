@@ -1,11 +1,6 @@
 ﻿// *********************************************************************************
-// Assembly         : Com.MarcusTS.LifecycleAware
-// Author           : Stephen Marcus (Marcus Technical Services, Inc.)
-// Created          : 12-24-2018
-// Last Modified On : 12-24-2018
-//
-// <copyright file="IReportAppLifecycle.cs" company="Marcus Technical Services, Inc.">
-//     Copyright @2018 Marcus Technical Services, Inc.
+// <copyright file=IReportAppLifecycle.cs company="Marcus Technical Services, Inc.">
+//     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
 // MIT License
@@ -31,30 +26,26 @@
 
 namespace Com.MarcusTS.LifecycleAware.Common.Interfaces
 {
-   using SharedUtils.Utils;
+   using Com.MarcusTS.SharedUtils.Utils;
 
    /// <summary>
-   /// Interface IReportAppLifecycle
+   ///    Interface IReportAppLifecycle
    /// </summary>
    public interface IReportAppLifecycle
    {
-      #region Public Events
-
       /// <summary>
-      /// Occurs when [application is going to sleep].
+      ///    Occurs when [application is going to sleep].
       /// </summary>
       event EventUtils.NoParamsDelegate AppIsGoingToSleep;
 
       /// <summary>
-      /// Occurs when [application is resuming].
+      ///    Occurs when [application is resuming].
       /// </summary>
       event EventUtils.NoParamsDelegate AppIsResuming;
 
       /// <summary>
-      /// Occurs when [application is starting].
+      ///    Occurs when [application is starting].
       /// </summary>
       event EventUtils.NoParamsDelegate AppIsStarting;
-
-      #endregion Public Events
    }
 }

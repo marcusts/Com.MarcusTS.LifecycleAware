@@ -1,11 +1,6 @@
 ﻿// *********************************************************************************
-// Assembly         : Com.MarcusTS.LifecycleAware
-// Author           : Stephen Marcus (Marcus Technical Services, Inc.)
-// Created          : 12-24-2018
-// Last Modified On : 12-24-2018
-//
-// <copyright file="IManagePageChanges.cs" company="Marcus Technical Services, Inc.">
-//     Copyright @2018 Marcus Technical Services, Inc.
+// <copyright file=IManagePageChanges.cs company="Marcus Technical Services, Inc.">
+//     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
 // MIT License
@@ -34,18 +29,14 @@ namespace Com.MarcusTS.LifecycleAware.Common.Interfaces
    using Xamarin.Forms;
 
    /// <summary>
-   /// Interface IManagePageChanges
+   ///    Interface IManagePageChanges
    /// </summary>
    public interface IManagePageChanges
    {
-      #region Public Methods
-
       /// <summary>
-      /// Sets the main page.
+      ///    Sets the main page.
       /// </summary>
       /// <param name="newPage">The new page.</param>
       void SetMainPage(Page newPage);
-
-      #endregion Public Methods
    }
 }

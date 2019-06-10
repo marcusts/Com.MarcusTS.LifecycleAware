@@ -1,11 +1,6 @@
 ﻿// *********************************************************************************
-// Assembly         : Com.MarcusTS.LifecycleAware
-// Author           : Stephen Marcus (Marcus Technical Services, Inc.)
-// Created          : 12-24-2018
-// Last Modified On : 12-24-2018
-//
-// <copyright file="IHostPageLifecycleReporter.cs" company="Marcus Technical Services, Inc.">
-//     Copyright @2018 Marcus Technical Services, Inc.
+// <copyright file=IHostPageLifecycleReporter.cs company="Marcus Technical Services, Inc.">
+//     Copyright @2019 Marcus Technical Services, Inc.
 // </copyright>
 //
 // MIT License
@@ -32,18 +27,24 @@
 namespace Com.MarcusTS.LifecycleAware.Common.Interfaces
 {
    /// <summary>
-   /// Interface IHostPageLifecycleReporter
+   ///    Interface IHostPageLifecycleReporter
    /// </summary>
    public interface IHostPageLifecycleReporter
    {
-      #region Public Properties
-
       /// <summary>
-      /// Gets or sets the page lifecycle reporter.
+      ///    Gets or sets the page lifecycle reporter.
       /// </summary>
       /// <value>The page lifecycle reporter.</value>
       IReportPageLifecycle PageLifecycleReporter { get; set; }
 
-      #endregion Public Properties
+      /// <summary>
+      ///    Called when [page appearing].
+      /// </summary>
+      void OnPageAppearing();
+
+      /// <summary>
+      ///    Called when [page disappearing].
+      /// </summary>
+      void OnPageDisappearing();
    }
 }

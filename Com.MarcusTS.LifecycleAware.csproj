@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,26 +10,40 @@
     <Copyright>Copyright @2018 Marcus Technical Services, Inc.</Copyright>
     <Version>1.0.10</Version>
     <AssemblyVersion>1.0.10.0</AssemblyVersion>
-    <PackageTags>ioc ioc-container di di-container object-lifecycle smart-di-container xamarin-forms C# lifecycle-aware</PackageTags>
-    <PackageReleaseNotes>Added public ForceDisappear method</PackageReleaseNotes>
+    <PackageTags>xamarin-forms C# lifecycle-aware</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <DocumentationFile>M:\MyDocs\Dev\MtsShared\LifecycleAware\Com.MarcusTS.LifecycleAware.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <Optimize>false</Optimize>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>D:\Dev\MtsShared\LifecycleAware\Com.MarcusTS.LifecycleAware.xml</DocumentationFile>
+    <DocumentationFile>M:\MyDocs\Dev\MtsShared\LifecycleAware\Com.MarcusTS.LifecycleAware.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
-    <PackageReference Include="Com.MarcusTS.SharedForms" Version="1.0.8" />
-    <PackageReference Include="Com.MarcusTS.SharedUtils" Version="1.0.7" />
-    <PackageReference Include="Fody" Version="3.3.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
+    <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="FodyWeavers.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.4" />
+    <PackageReference Include="AutoProperties.Fody" Version="1.22.0" />
+    <PackageReference Include="Com.MarcusTS.SharedForms" Version="1.0.10" />
+    <PackageReference Include="Com.MarcusTS.SharedUtils" Version="1.0.10" />
+    <PackageReference Include="PropertyChanged2.Fody" Version="2.6.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.482894" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,9 +51,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Com.MarcusTS.LifecycleAware.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Com.MarcusTS.LifecyleAware.nuspec">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="license.txt">
