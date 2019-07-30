@@ -28,9 +28,9 @@ namespace Com.MarcusTS.LifecycleAware.Views.SubViews
 {
    using Com.MarcusTS.LifecycleAware.Common.Interfaces;
    using Com.MarcusTS.LifecycleAware.Common.Utils;
-   using Com.MarcusTS.SharedForms.Common.Utils;
    using Com.MarcusTS.SharedUtils.Utils;
    using System;
+   using SharedForms.Common.Utils;
    using Xamarin.Forms;
 
    /// <summary>

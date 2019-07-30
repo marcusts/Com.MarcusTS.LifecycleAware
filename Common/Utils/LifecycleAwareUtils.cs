@@ -27,9 +27,9 @@
 namespace Com.MarcusTS.LifecycleAware.Common.Utils
 {
    using Com.MarcusTS.LifecycleAware.Common.Interfaces;
-   using Com.MarcusTS.SharedForms.Common.Notifications;
    using Com.MarcusTS.SharedUtils.Events;
    using System.Diagnostics;
+   using SharedForms.Common.Notifications;
    using Xamarin.Forms;
 
    /// <summary>
