@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Com.MarcusTS.SmartDI</id>
+    <version>1.0.4</version>
+    <title>Smart DI Container - Lifecycle Aware</title>
+    <authors>Stephen Marcus</authors>
+    <owners>Marcus Technical Services, Inc.</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <license type="file">license.txt</license>
+     <description>
+        Adds class Lifecycle awareness to the Smart DI Container.
+     </description>
+    <copyright>Copyright 2019 Marcus Technical Services, Inc. (https://www.marcusts.com)</copyright>
+     <releaseNotes>Bug fixes.</releaseNotes>
+    <tags>ioc ioc-container di di-container object-lifecycle smart-di-container</tags>
+  </metadata>
+</package>
