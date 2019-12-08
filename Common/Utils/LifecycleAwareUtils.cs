@@ -1,55 +1,55 @@
-﻿// *********************************************************************************
-// <copyright file=LifecycleAwareUtils.cs company="Marcus Technical Services, Inc.">
-//     Copyright @2019 Marcus Technical Services, Inc.
-// </copyright>
+﻿#region License
+
+// Copyright (c) 2019  Marcus Technical Services, Inc. <marcus@marcusts.com>
 //
-// MIT License
+// This file, LifecycleAwareUtils.cs, is a part of a program called AccountViewMobile.
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// AccountViewMobile is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// Permission to use, copy, modify, and/or distribute this software
+// for any purpose with or without fee is hereby granted, provided
+// that the above copyright notice and this permission notice appear
+// in all copies.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-// *********************************************************************************
+// AccountViewMobile is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// For the complete GNU General Public License,
+// see <http://www.gnu.org/licenses/>.
+
+#endregion
 
 namespace Com.MarcusTS.LifecycleAware.Common.Utils
 {
-   using Com.MarcusTS.LifecycleAware.Common.Interfaces;
-   using Com.MarcusTS.SharedUtils.Events;
-   using System.Diagnostics;
+   using Interfaces;
    using SharedForms.Common.Notifications;
+   using SharedUtils.Events;
+   using SharedUtils.Utils;
    using Xamarin.Forms;
 
    /// <summary>
-   ///    Class LifecycleAwareUtils.
-   ///    Implements the <see cref="object" />
+   /// Class LifecycleAwareUtils.
+   /// Implements the <see cref="object" />
    /// </summary>
    /// <seealso cref="object" />
    public static class LifecycleAwareUtils
    {
       /// <summary>
-      ///    Sends the object disappearing message.
+      /// Sends the object disappearing message.
       /// </summary>
       /// <param name="obj">The object.</param>
       public static void SendObjectDisappearingMessage(this object obj)
       {
-         FormsMessengerUtils.Send(new ObjectDisappearingMessage { Payload = obj });
+         FormsMessengerUtils.Send(new ObjectDisappearingMessage {Payload = obj});
       }
 
       /// <summary>
-      ///    Sets the application lifecycle reporter.
+      /// Sets the application lifecycle reporter.
       /// </summary>
       /// <param name="host">The host.</param>
       /// <param name="hostProperty">The host property.</param>
@@ -61,7 +61,8 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
          IReportAppLifecycle            newReporter
       )
       {
-         Debug.Assert(host != null, "Cannot pass a null host to ->" + nameof(SetAppLifecycleReporter) + "<-");
+         ErrorUtils.ConsiderArgumentError(host.IsNullOrDefault(),
+                                          "Cannot pass a null host to ->" + nameof(SetAppLifecycleReporter) + "<-");
 
          var refHost = host;
 
@@ -111,13 +112,14 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      ///    Sets the binding context lifecycle reporters.
+      /// Sets the binding context lifecycle reporters.
       /// </summary>
       /// <param name="parent">The parent.</param>
       public static void SetBindingContextLifecycleReporters(this BindableObject parent)
       {
-         Debug.Assert(parent != null,
-                      "Cannot submit null parent to ->" + nameof(SetBindingContextLifecycleReporters) + "<-");
+         ErrorUtils.ConsiderArgumentError(parent.IsNullOrDefault(),
+                                          "Cannot submit null parent to ->"           +
+                                          nameof(SetBindingContextLifecycleReporters) + "<-");
 
          parent.BindingContextChanged +=
             (
@@ -130,7 +132,7 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      ///    Sets the lifecycle reporters.
+      /// Sets the lifecycle reporters.
       /// </summary>
       /// <param name="content">The content.</param>
       /// <param name="parent">The parent.</param>
@@ -181,7 +183,7 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      ///    Sets the page lifecycle reporter.
+      /// Sets the page lifecycle reporter.
       /// </summary>
       /// <param name="host">The host.</param>
       /// <param name="hostProperty">The host property.</param>
@@ -193,7 +195,8 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
          IReportPageLifecycle            newReporter
       )
       {
-         Debug.Assert(host != null, "Cannot pass a null host to ->" + nameof(SetPageLifecycleReporter) + "<-");
+         ErrorUtils.ConsiderArgumentError(host.IsNullOrDefault(),
+                                          "Cannot pass a null host to ->" + nameof(SetPageLifecycleReporter) + "<-");
 
          var refHost = host;
 
@@ -231,7 +234,7 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      ///    Sets the stage lifecycle reporter.
+      /// Sets the stage lifecycle reporter.
       /// </summary>
       /// <param name="host">The host.</param>
       /// <param name="hostProperty">The host property.</param>
@@ -243,7 +246,8 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
          IReportStageLifecycle            newReporter
       )
       {
-         Debug.Assert(host != null, "Cannot pass a null host to ->" + nameof(SetStageLifecycleReporter) + "<-");
+         ErrorUtils.ConsiderArgumentError(host.IsNullOrDefault(),
+                                          "Cannot pass a null host to ->" + nameof(SetStageLifecycleReporter) + "<-");
 
          var refHost = host;
 

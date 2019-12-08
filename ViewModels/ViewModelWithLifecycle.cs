@@ -1,50 +1,50 @@
-﻿// *********************************************************************************
-// <copyright file=ViewModelWithLifecycle.cs company="Marcus Technical Services, Inc.">
-//     Copyright @2019 Marcus Technical Services, Inc.
-// </copyright>
+﻿#region License
+
+// Copyright (c) 2019  Marcus Technical Services, Inc. <marcus@marcusts.com>
 //
-// MIT License
+// This file, ViewModelWithLifecycle.cs, is a part of a program called AccountViewMobile.
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// AccountViewMobile is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// Permission to use, copy, modify, and/or distribute this software
+// for any purpose with or without fee is hereby granted, provided
+// that the above copyright notice and this permission notice appear
+// in all copies.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-// *********************************************************************************
+// AccountViewMobile is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// For the complete GNU General Public License,
+// see <http://www.gnu.org/licenses/>.
+
+#endregion
 
 namespace Com.MarcusTS.LifecycleAware.ViewModels
 {
-   using Com.MarcusTS.LifecycleAware.Common.Interfaces;
-   using Com.MarcusTS.LifecycleAware.Common.Utils;
+   using Common.Interfaces;
+   using Common.Utils;
    using System;
    using System.ComponentModel;
    using System.Runtime.CompilerServices;
 
    /// <summary>
-   ///    Interface IViewModelWithLifecycle
-   ///    Implements the <see cref="System.ComponentModel.INotifyPropertyChanged" />
-   ///    Implements the <see cref="INotifyPropertyChanged" />
-   ///    Implements the <see cref="System.ComponentModel" />
-   ///    Implements the <see cref="System" />
-   ///    Implements the <see cref="System.ComponentModel.INotifyPropertyChanged" />
-   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostAppLifecycleReporter" />
-   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostPageLifecycleReporter" />
-   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.ICleanUpBeforeFinalization" />
-   ///    Implements the <see cref="INotifyPropertyChanged" />
-   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostStageLifecycleReporter" />
-   ///    Implements the <see cref="System.IDisposable" />
+   /// Interface IViewModelWithLifecycle
+   /// Implements the <see cref="System.ComponentModel.INotifyPropertyChanged" />
+   /// Implements the <see cref="INotifyPropertyChanged" />
+   /// Implements the <see cref="System.ComponentModel" />
+   /// Implements the <see cref="System" />
+   /// Implements the <see cref="System.ComponentModel.INotifyPropertyChanged" />
+   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostAppLifecycleReporter" />
+   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostPageLifecycleReporter" />
+   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.ICleanUpBeforeFinalization" />
+   /// Implements the <see cref="INotifyPropertyChanged" />
+   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostStageLifecycleReporter" />
+   /// Implements the <see cref="System.IDisposable" />
    /// </summary>
    /// <seealso cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IHostStageLifecycleReporter" />
    /// <seealso cref="System.IDisposable" />
@@ -64,48 +64,46 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
    }
 
    /// <summary>
-   ///    Use this as the basis of all view models if possible. If not possible in a few cases, copy this code into your
-   ///    other classes as-is and it will work the same way.
-   ///    Implements the <see cref="IViewModelWithLifecycle" />
-   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.ViewModels.IViewModelWithLifecycle" />
-   ///    Implements the <see cref="object" />
+   /// Use this as the basis of all view models if possible. If not possible in a few cases, copy this code into your
+   /// other classes as-is and it will work the same way.
+   /// Implements the <see cref="IViewModelWithLifecycle" />
+   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.ViewModels.IViewModelWithLifecycle" />
+   /// Implements the <see cref="object" />
    /// </summary>
    /// <seealso cref="object" />
    /// <seealso cref="Com.MarcusTS.LifecycleAware.ViewModels.IViewModelWithLifecycle" />
    /// <seealso cref="IViewModelWithLifecycle" />
-   /// <remarks>
-   ///    REMEMBER to set the <see cref="AppLifecycleReporter" /> to the current app and the
-   ///    <see cref="PageLifecycleReporter" /> to the parent page. The event ties are weak and non-binding.
-   /// </remarks>
+   /// <remarks>REMEMBER to set the <see cref="AppLifecycleReporter" /> to the current app and the
+   /// <see cref="PageLifecycleReporter" /> to the parent page. The event ties are weak and non-binding.</remarks>
    public class ViewModelWithLifecycle : IViewModelWithLifecycle
    {
       /// <summary>
-      ///    The application lifecycle reporter
+      /// The application lifecycle reporter
       /// </summary>
       private IReportAppLifecycle _appLifecycleReporter;
 
       /// <summary>
-      ///    The is cleaning up
+      /// The is cleaning up
       /// </summary>
       private bool _isCleaningUp;
 
       /// <summary>
-      ///    The page lifecycle reporter
+      /// The page lifecycle reporter
       /// </summary>
       private IReportPageLifecycle _pageLifecycleReporter;
 
       /// <summary>
-      ///    The stage lifecycle reporter
+      /// The stage lifecycle reporter
       /// </summary>
       private IReportStageLifecycle _stageLifecycleReporter;
 
       /// <summary>
-      ///    Occurs when [property changed].
+      /// Occurs when [property changed].
       /// </summary>
       public event PropertyChangedEventHandler PropertyChanged;
 
       /// <summary>
-      ///    Gets or sets the application lifecycle reporter.
+      /// Gets or sets the application lifecycle reporter.
       /// </summary>
       /// <value>The application lifecycle reporter.</value>
       public IReportAppLifecycle AppLifecycleReporter
@@ -115,7 +113,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Gets or sets a value indicating whether this instance is cleaning up before finalization.
+      /// Gets or sets a value indicating whether this instance is cleaning up before finalization.
       /// </summary>
       /// <value><c>true</c> if this instance is cleaning up before finalization; otherwise, <c>false</c>.</value>
       public bool IsCleaningUpBeforeFinalization
@@ -139,7 +137,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Gets or sets the page lifecycle reporter.
+      /// Gets or sets the page lifecycle reporter.
       /// </summary>
       /// <value>The page lifecycle reporter.</value>
       public IReportPageLifecycle PageLifecycleReporter
@@ -149,7 +147,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Gets or sets the stage lifecycle reporter.
+      /// Gets or sets the stage lifecycle reporter.
       /// </summary>
       /// <value>The stage lifecycle reporter.</value>
       public IReportStageLifecycle StageLifecycleReporter
@@ -159,7 +157,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Disposes this instance.
+      /// Disposes this instance.
       /// </summary>
       public void Dispose()
       {
@@ -168,53 +166,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Called when [page appearing].
-      /// </summary>
-      /// <exception cref="NotImplementedException"></exception>
-      public virtual void OnPageAppearing()
-      {
-      }
-
-      /// <summary>
-      ///    Called when [page disappearing].
-      /// </summary>
-      /// <exception cref="NotImplementedException"></exception>
-      public virtual void OnPageDisappearing()
-      {
-      }
-
-      /// <summary>
-      ///    Called when [stage appearing].
-      /// </summary>
-      public virtual void OnStageAppearing()
-      {
-      }
-
-      /// <summary>
-      ///    Called when [stage disappearing].
-      /// </summary>
-      public virtual void OnStageDisappearing()
-      {
-      }
-
-      /// <summary>
-      ///    Called when [application resuming].
-      /// </summary>
-      void IHostAppLifecycleReporter.OnAppResuming()
-      {
-         OnAppResuming();
-      }
-
-      /// <summary>
-      ///    Called when [application starting].
-      /// </summary>
-      void IHostAppLifecycleReporter.OnAppStarting()
-      {
-         OnAppStarting();
-      }
-
-      /// <summary>
-      ///    Called when [application going to sleep].
+      /// Called when [application going to sleep].
       /// </summary>
       void IHostAppLifecycleReporter.OnAppGoingToSleep()
       {
@@ -222,7 +174,53 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Finalizes an instance of the <see cref="ViewModelWithLifecycle" /> class.
+      /// Called when [application resuming].
+      /// </summary>
+      void IHostAppLifecycleReporter.OnAppResuming()
+      {
+         OnAppResuming();
+      }
+
+      /// <summary>
+      /// Called when [application starting].
+      /// </summary>
+      void IHostAppLifecycleReporter.OnAppStarting()
+      {
+         OnAppStarting();
+      }
+
+      /// <summary>
+      /// Called when [page appearing].
+      /// </summary>
+      /// <exception cref="NotImplementedException"></exception>
+      public virtual void OnPageAppearing()
+      {
+      }
+
+      /// <summary>
+      /// Called when [page disappearing].
+      /// </summary>
+      /// <exception cref="NotImplementedException"></exception>
+      public virtual void OnPageDisappearing()
+      {
+      }
+
+      /// <summary>
+      /// Called when [stage appearing].
+      /// </summary>
+      public virtual void OnStageAppearing()
+      {
+      }
+
+      /// <summary>
+      /// Called when [stage disappearing].
+      /// </summary>
+      public virtual void OnStageDisappearing()
+      {
+      }
+
+      /// <summary>
+      /// Finalizes an instance of the <see cref="ViewModelWithLifecycle" /> class.
       /// </summary>
       ~ViewModelWithLifecycle()
       {
@@ -233,12 +231,10 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Releases unmanaged and - optionally - managed resources.
+      /// Releases unmanaged and - optionally - managed resources.
       /// </summary>
-      /// <param name="disposing">
-      ///    <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
-      ///    unmanaged resources.
-      /// </param>
+      /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+      /// unmanaged resources.</param>
       protected virtual void Dispose(bool disposing)
       {
          ReleaseUnmanagedResources();
@@ -248,35 +244,35 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Called when [application going to sleep].
+      /// Called when [application going to sleep].
       /// </summary>
       protected virtual void OnAppGoingToSleep()
       {
       }
 
       /// <summary>
-      ///    Called when [application resuming].
+      /// Called when [application resuming].
       /// </summary>
       protected virtual void OnAppResuming()
       {
       }
 
       /// <summary>
-      ///    Called when [application starting].
+      /// Called when [application starting].
       /// </summary>
       protected virtual void OnAppStarting()
       {
       }
 
       /// <summary>
-      ///    Called when [is cleaning up before finalization].
+      /// Called when [is cleaning up before finalization].
       /// </summary>
       protected virtual void OnIsCleaningUpBeforeFinalization()
       {
       }
 
       /// <summary>
-      ///    Called when [page appearing].
+      /// Called when [page appearing].
       /// </summary>
       /// <param name="val">The value.</param>
       protected virtual void OnPageAppearing(object val)
@@ -284,7 +280,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Called when [page disappearing].
+      /// Called when [page disappearing].
       /// </summary>
       /// <param name="val">The value.</param>
       protected virtual void OnPageDisappearing(object val)
@@ -293,7 +289,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Called when [property changed].
+      /// Called when [property changed].
       /// </summary>
       /// <param name="propertyName">Name of the property.</param>
       protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -302,7 +298,7 @@ namespace Com.MarcusTS.LifecycleAware.ViewModels
       }
 
       /// <summary>
-      ///    Releases the unmanaged resources.
+      /// Releases the unmanaged resources.
       /// </summary>
       protected virtual void ReleaseUnmanagedResources()
       {

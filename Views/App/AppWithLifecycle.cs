@@ -1,41 +1,41 @@
-﻿// *********************************************************************************
-// <copyright file=AppWithLifecycle.cs company="Marcus Technical Services, Inc.">
-//     Copyright @2019 Marcus Technical Services, Inc.
-// </copyright>
+﻿#region License
+
+// Copyright (c) 2019  Marcus Technical Services, Inc. <marcus@marcusts.com>
 //
-// MIT License
+// This file, AppWithLifecycle.cs, is a part of a program called AccountViewMobile.
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// AccountViewMobile is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// Permission to use, copy, modify, and/or distribute this software
+// for any purpose with or without fee is hereby granted, provided
+// that the above copyright notice and this permission notice appear
+// in all copies.
 //
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-// *********************************************************************************
+// AccountViewMobile is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// For the complete GNU General Public License,
+// see <http://www.gnu.org/licenses/>.
+
+#endregion
 
 namespace Com.MarcusTS.LifecycleAware.Views.App
 {
-   using Com.MarcusTS.LifecycleAware.Common.Interfaces;
-   using Com.MarcusTS.LifecycleAware.Common.Utils;
-   using Com.MarcusTS.SharedUtils.Utils;
+   using Common.Interfaces;
+   using Common.Utils;
+   using SharedUtils.Utils;
    using Xamarin.Forms;
 
    /// <summary>
-   ///    Class AppWithLifecycle.
-   ///    Implements the <see cref="Xamarin.Forms.Application" />
-   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IReportAppLifecycle" />
-   ///    Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IManageMainPage" />
+   /// Class AppWithLifecycle.
+   /// Implements the <see cref="Xamarin.Forms.Application" />
+   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IReportAppLifecycle" />
+   /// Implements the <see cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IManageMainPage" />
    /// </summary>
    /// <seealso cref="Xamarin.Forms.Application" />
    /// <seealso cref="Com.MarcusTS.LifecycleAware.Common.Interfaces.IReportAppLifecycle" />
@@ -43,7 +43,7 @@ namespace Com.MarcusTS.LifecycleAware.Views.App
    public class AppWithLifecycle : Application, IReportAppLifecycle, IManageMainPage
    {
       /// <summary>
-      ///    Gets or sets the root page of the application.
+      /// Gets or sets the root page of the application.
       /// </summary>
       /// <value>The root page of the application.</value>
       /// <remarks>This property throws an exception if the application developer attempts to set it to <see langword="null" />.</remarks>
@@ -62,22 +62,22 @@ namespace Com.MarcusTS.LifecycleAware.Views.App
       }
 
       /// <summary>
-      ///    Occurs when [application is going to sleep].
+      /// Occurs when [application is going to sleep].
       /// </summary>
       public event EventUtils.NoParamsDelegate AppIsGoingToSleep;
 
       /// <summary>
-      ///    Occurs when [application is resuming].
+      /// Occurs when [application is resuming].
       /// </summary>
       public event EventUtils.NoParamsDelegate AppIsResuming;
 
       /// <summary>
-      ///    Occurs when [application is starting].
+      /// Occurs when [application is starting].
       /// </summary>
       public event EventUtils.NoParamsDelegate AppIsStarting;
 
       /// <summary>
-      ///    Application developers override this method to perform actions when the application resumes from a sleeping state.
+      /// Application developers override this method to perform actions when the application resumes from a sleeping state.
       /// </summary>
       /// <remarks>To be added.</remarks>
       protected override void OnResume()
@@ -86,7 +86,7 @@ namespace Com.MarcusTS.LifecycleAware.Views.App
       }
 
       /// <summary>
-      ///    Application developers override this method to perform actions when the application enters the sleeping state.
+      /// Application developers override this method to perform actions when the application enters the sleeping state.
       /// </summary>
       /// <remarks>To be added.</remarks>
       protected override void OnSleep()
@@ -95,7 +95,7 @@ namespace Com.MarcusTS.LifecycleAware.Views.App
       }
 
       /// <summary>
-      ///    Called when [start].
+      /// Called when [start].
       /// </summary>
       protected override void OnStart()
       {
