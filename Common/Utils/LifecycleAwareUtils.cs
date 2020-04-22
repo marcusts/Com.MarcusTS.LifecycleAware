@@ -1,46 +1,20 @@
-﻿#region License
-
-// Copyright (c) 2019  Marcus Technical Services, Inc. <marcus@marcusts.com>
-//
-// This file, LifecycleAwareUtils.cs, is a part of a program called AccountViewMobile.
-//
-// AccountViewMobile is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Permission to use, copy, modify, and/or distribute this software
-// for any purpose with or without fee is hereby granted, provided
-// that the above copyright notice and this permission notice appear
-// in all copies.
-//
-// AccountViewMobile is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// For the complete GNU General Public License,
-// see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-namespace Com.MarcusTS.LifecycleAware.Common.Utils
+﻿namespace Com.MarcusTS.LifecycleAware.Common.Utils
 {
-   using Interfaces;
-   using SharedForms.Common.Notifications;
-   using SharedUtils.Events;
-   using SharedUtils.Utils;
+   using Com.MarcusTS.LifecycleAware.Common.Interfaces;
+   using Com.MarcusTS.SharedForms.Common.Notifications;
+   using Com.MarcusTS.SharedUtils.Events;
+   using Com.MarcusTS.SharedUtils.Utils;
    using Xamarin.Forms;
 
    /// <summary>
-   /// Class LifecycleAwareUtils.
-   /// Implements the <see cref="object" />
+   ///    Class LifecycleAwareUtils.
+   ///    Implements the <see cref="object" />
    /// </summary>
    /// <seealso cref="object" />
    public static class LifecycleAwareUtils
    {
       /// <summary>
-      /// Sends the object disappearing message.
+      ///    Sends the object disappearing message.
       /// </summary>
       /// <param name="obj">The object.</param>
       public static void SendObjectDisappearingMessage(this object obj)
@@ -49,7 +23,7 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      /// Sets the application lifecycle reporter.
+      ///    Sets the application lifecycle reporter.
       /// </summary>
       /// <param name="host">The host.</param>
       /// <param name="hostProperty">The host property.</param>
@@ -112,7 +86,7 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      /// Sets the binding context lifecycle reporters.
+      ///    Sets the binding context lifecycle reporters.
       /// </summary>
       /// <param name="parent">The parent.</param>
       public static void SetBindingContextLifecycleReporters(this BindableObject parent)
@@ -132,7 +106,7 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      /// Sets the lifecycle reporters.
+      ///    Sets the lifecycle reporters.
       /// </summary>
       /// <param name="content">The content.</param>
       /// <param name="parent">The parent.</param>
@@ -183,7 +157,7 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      /// Sets the page lifecycle reporter.
+      ///    Sets the page lifecycle reporter.
       /// </summary>
       /// <param name="host">The host.</param>
       /// <param name="hostProperty">The host property.</param>
@@ -234,7 +208,7 @@ namespace Com.MarcusTS.LifecycleAware.Common.Utils
       }
 
       /// <summary>
-      /// Sets the stage lifecycle reporter.
+      ///    Sets the stage lifecycle reporter.
       /// </summary>
       /// <param name="host">The host.</param>
       /// <param name="hostProperty">The host property.</param>
