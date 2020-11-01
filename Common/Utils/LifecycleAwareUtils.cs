@@ -19,7 +19,7 @@
       /// <param name="obj">The object.</param>
       public static void SendObjectDisappearingMessage(this object obj)
       {
-         FormsMessengerUtils.Send(new ObjectDisappearingMessage {Payload = obj});
+         FormsMessengerUtils.Send(new ObjectDisappearingMessage { Payload = obj });
       }
 
       /// <summary>
@@ -31,8 +31,8 @@
       public static void SetAppLifecycleReporter
       (
          this IHostAppLifecycleReporter host,
-         ref  IReportAppLifecycle       hostProperty,
-         IReportAppLifecycle            newReporter
+         ref IReportAppLifecycle hostProperty,
+         IReportAppLifecycle newReporter
       )
       {
          ErrorUtils.ConsiderArgumentError(host.IsNullOrDefault(),
@@ -92,7 +92,7 @@
       public static void SetBindingContextLifecycleReporters(this BindableObject parent)
       {
          ErrorUtils.ConsiderArgumentError(parent.IsNullOrDefault(),
-                                          "Cannot submit null parent to ->"           +
+                                          "Cannot submit null parent to ->" +
                                           nameof(SetBindingContextLifecycleReporters) + "<-");
 
          parent.BindingContextChanged +=
@@ -113,7 +113,7 @@
       public static void SetLifecycleReporters
       (
          this object content,
-         object      parent
+         object parent
       )
       {
          if (content is IHostAppLifecycleReporter contentAsIHostAppLifecycleReporter)
@@ -165,8 +165,8 @@
       public static void SetPageLifecycleReporter
       (
          this IHostPageLifecycleReporter host,
-         ref  IReportPageLifecycle       hostProperty,
-         IReportPageLifecycle            newReporter
+         ref IReportPageLifecycle hostProperty,
+         IReportPageLifecycle newReporter
       )
       {
          ErrorUtils.ConsiderArgumentError(host.IsNullOrDefault(),
@@ -216,8 +216,8 @@
       public static void SetStageLifecycleReporter
       (
          this IHostStageLifecycleReporter host,
-         ref  IReportStageLifecycle       hostProperty,
-         IReportStageLifecycle            newReporter
+         ref IReportStageLifecycle hostProperty,
+         IReportStageLifecycle newReporter
       )
       {
          ErrorUtils.ConsiderArgumentError(host.IsNullOrDefault(),

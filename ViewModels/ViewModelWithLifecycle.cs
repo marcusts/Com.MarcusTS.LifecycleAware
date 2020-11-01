@@ -1,10 +1,10 @@
 ﻿namespace Com.MarcusTS.LifecycleAware.ViewModels
 {
+   using Com.MarcusTS.LifecycleAware.Common.Interfaces;
+   using Com.MarcusTS.LifecycleAware.Common.Utils;
    using System;
    using System.ComponentModel;
    using System.Runtime.CompilerServices;
-   using Com.MarcusTS.LifecycleAware.Common.Interfaces;
-   using Com.MarcusTS.LifecycleAware.Common.Utils;
 
    /// <summary>
    ///    Interface IViewModelWithLifecycle
@@ -142,30 +142,6 @@
       }
 
       /// <summary>
-      ///    Called when [application going to sleep].
-      /// </summary>
-      void IHostAppLifecycleReporter.OnAppGoingToSleep()
-      {
-         OnAppGoingToSleep();
-      }
-
-      /// <summary>
-      ///    Called when [application resuming].
-      /// </summary>
-      void IHostAppLifecycleReporter.OnAppResuming()
-      {
-         OnAppResuming();
-      }
-
-      /// <summary>
-      ///    Called when [application starting].
-      /// </summary>
-      void IHostAppLifecycleReporter.OnAppStarting()
-      {
-         OnAppStarting();
-      }
-
-      /// <summary>
       ///    Called when [page appearing].
       /// </summary>
       /// <exception cref="NotImplementedException"></exception>
@@ -196,14 +172,27 @@
       }
 
       /// <summary>
-      ///    Finalizes an instance of the <see cref="ViewModelWithLifecycle" /> class.
+      ///    Called when [application going to sleep].
       /// </summary>
-      ~ViewModelWithLifecycle()
+      void IHostAppLifecycleReporter.OnAppGoingToSleep()
       {
-         if (!IsCleaningUpBeforeFinalization)
-         {
-            IsCleaningUpBeforeFinalization = true;
-         }
+         OnAppGoingToSleep();
+      }
+
+      /// <summary>
+      ///    Called when [application resuming].
+      /// </summary>
+      void IHostAppLifecycleReporter.OnAppResuming()
+      {
+         OnAppResuming();
+      }
+
+      /// <summary>
+      ///    Called when [application starting].
+      /// </summary>
+      void IHostAppLifecycleReporter.OnAppStarting()
+      {
+         OnAppStarting();
       }
 
       /// <summary>
@@ -280,6 +269,17 @@
       /// </summary>
       protected virtual void ReleaseUnmanagedResources()
       {
+      }
+
+      /// <summary>
+      ///    Finalizes an instance of the <see cref="ViewModelWithLifecycle" /> class.
+      /// </summary>
+      ~ViewModelWithLifecycle()
+      {
+         if (!IsCleaningUpBeforeFinalization)
+         {
+            IsCleaningUpBeforeFinalization = true;
+         }
       }
    }
 }

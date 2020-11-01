@@ -17,6 +17,21 @@
    public class AppWithLifecycle : Application, IReportAppLifecycle, IManageMainPage
    {
       /// <summary>
+      ///    Occurs when [application is going to sleep].
+      /// </summary>
+      public event EventUtils.NoParamsDelegate AppIsGoingToSleep;
+
+      /// <summary>
+      ///    Occurs when [application is resuming].
+      /// </summary>
+      public event EventUtils.NoParamsDelegate AppIsResuming;
+
+      /// <summary>
+      ///    Occurs when [application is starting].
+      /// </summary>
+      public event EventUtils.NoParamsDelegate AppIsStarting;
+
+      /// <summary>
       ///    Gets or sets the root page of the application.
       /// </summary>
       /// <value>The root page of the application.</value>
@@ -34,21 +49,6 @@
             }
          }
       }
-
-      /// <summary>
-      ///    Occurs when [application is going to sleep].
-      /// </summary>
-      public event EventUtils.NoParamsDelegate AppIsGoingToSleep;
-
-      /// <summary>
-      ///    Occurs when [application is resuming].
-      /// </summary>
-      public event EventUtils.NoParamsDelegate AppIsResuming;
-
-      /// <summary>
-      ///    Occurs when [application is starting].
-      /// </summary>
-      public event EventUtils.NoParamsDelegate AppIsStarting;
 
       /// <summary>
       ///    Application developers override this method to perform actions when the application resumes from a sleeping state.

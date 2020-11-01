@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Com.MarcusTS.SmartDI.LifecycleAware</name>
+    </assembly>
+    <members>
+        <member name="T:Com.MarcusTS.SmartDI.LifecycleAware.ISmartDIContainerWithLifecycle">
+            <summary>
+            Interface ISmartDIContainerWithLifecycle
+            </summary>
+        </member>
+        <member name="T:Com.MarcusTS.SmartDI.LifecycleAware.SmartDIContainerWithLifecycle">
+            <summary>
+            Class SmartDIContainerWithLifecycle.
+            Implements the <see cref="T:Com.MarcusTS.SmartDI.SmartDIContainer" />
+            Implements the <see cref="T:Com.MarcusTS.SmartDI.LifecycleAware.ISmartDIContainerWithLifecycle" />
+            </summary>
+            <seealso cref="T:Com.MarcusTS.SmartDI.SmartDIContainer" />
+            <seealso cref="T:Com.MarcusTS.SmartDI.LifecycleAware.ISmartDIContainerWithLifecycle" />
+        </member>
+        <member name="M:Com.MarcusTS.SmartDI.LifecycleAware.SmartDIContainerWithLifecycle.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Com.MarcusTS.SmartDI.LifecycleAware.SmartDIContainerWithLifecycle" /> class.
+            </summary>
+        </member>
+        <member name="M:Com.MarcusTS.SmartDI.LifecycleAware.SmartDIContainerWithLifecycle.OnObjectDisappearing(System.Object,Com.MarcusTS.SharedForms.Utils.ObjectDisappearingMessage)">
+            <summary>
+            Called when [object disappearing].
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="mess">The mess.</param>
+        </member>
+        <member name="T:Com.MarcusTS.SmartDI.LifecycleAware.ISmartDIContainerWithLifecycleForUnitTesting">
+            <summary>
+            Interface ISmartDIContainerWithLifecycleForUnitTesting
+            Implements the <see cref="T:Com.MarcusTS.SmartDI.ISmartDIContainerForUnitTesting" />
+            </summary>
+            <seealso cref="T:Com.MarcusTS.SmartDI.ISmartDIContainerForUnitTesting" />
+        </member>
+        <member name="T:Com.MarcusTS.SmartDI.LifecycleAware.SmartDIContainerWithLifecycleForUnitTesting">
+            <summary>
+            Class SmartDIContainerWithLifecycleForUnitTesting.
+            Implements the <see cref="T:Com.MarcusTS.SmartDI.SmartDIContainerForUnitTesting" />
+            Implements the <see cref="T:Com.MarcusTS.SmartDI.LifecycleAware.ISmartDIContainerWithLifecycleForUnitTesting" />
+            </summary>
+            <seealso cref="T:Com.MarcusTS.SmartDI.SmartDIContainerForUnitTesting" />
+            <seealso cref="T:Com.MarcusTS.SmartDI.LifecycleAware.ISmartDIContainerWithLifecycleForUnitTesting" />
+        </member>
+        <member name="M:Com.MarcusTS.SmartDI.LifecycleAware.SmartDIContainerWithLifecycleForUnitTesting.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Com.MarcusTS.SmartDI.LifecycleAware.SmartDIContainerWithLifecycleForUnitTesting" /> class.
+            </summary>
+        </member>
+        <member name="M:Com.MarcusTS.SmartDI.LifecycleAware.SmartDIContainerWithLifecycleForUnitTesting.OnObjectDisappearing(System.Object,Com.MarcusTS.SharedForms.Utils.ObjectDisappearingMessage)">
+            <summary>
+            Called when [object disappearing].
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="mess">The mess.</param>
+        </member>
+    </members>
+</doc>

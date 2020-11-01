@@ -36,7 +36,7 @@
       /// <param name="mess">The mess.</param>
       private void OnObjectDisappearing
       (
-         object                    sender,
+         object sender,
          ObjectDisappearingMessage mess
       )
       {

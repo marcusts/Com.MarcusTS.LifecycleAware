@@ -1,10 +1,10 @@
 ﻿namespace Com.MarcusTS.LifecycleAware.Views.Pages
 {
-   using System;
    using Com.MarcusTS.LifecycleAware.Common.Interfaces;
    using Com.MarcusTS.LifecycleAware.Common.Utils;
    using Com.MarcusTS.SharedForms.Common.Utils;
    using Com.MarcusTS.SharedUtils.Utils;
+   using System;
    using Xamarin.Forms;
 
    /// <summary>
@@ -78,22 +78,6 @@
       }
 
       /// <summary>
-      ///    Gets or sets the view that contains the content of the Page.
-      /// </summary>
-      /// <value>A <see cref="T:Xamarin.Forms.View" /> subclass, or <see langword="null" />.</value>
-      /// <remarks>To be added.</remarks>
-      public new View Content
-      {
-         get => base.Content;
-         set
-         {
-            base.Content = value;
-
-            SetUpNewContent();
-         }
-      }
-
-      /// <summary>
       ///    Occurs when [page is appearing].
       /// </summary>
       public event EventUtils.GenericDelegate<object> PageIsAppearing;
@@ -111,6 +95,52 @@
       {
          get => _appLifecycleReporter;
          set => this.SetAppLifecycleReporter(ref _appLifecycleReporter, value);
+      }
+
+      /// <summary>
+      ///    Gets or sets the view that contains the content of the Page.
+      /// </summary>
+      /// <value>A <see cref="T:Xamarin.Forms.View" /> subclass, or <see langword="null" />.</value>
+      /// <remarks>To be added.</remarks>
+      public new View Content
+      {
+         get => base.Content;
+         set
+         {
+            base.Content = value;
+
+            SetUpNewContent();
+         }
+      }
+
+      /// <summary>
+      ///    Creates the content page with lifecycle bindable property.
+      /// </summary>
+      /// <typeparam name="PropertyTypeT">The type of the property type t.</typeparam>
+      /// <param name="localPropName">Name of the local property.</param>
+      /// <param name="defaultVal">The default value.</param>
+      /// <param name="bindingMode">The binding mode.</param>
+      /// <param name="callbackAction">The callback action.</param>
+      /// <returns>BindableProperty.</returns>
+      public static BindableProperty CreateContentPageWithLifecycleBindableProperty<PropertyTypeT>
+      (
+         string localPropName,
+         PropertyTypeT
+            defaultVal =
+            default,
+         BindingMode
+            bindingMode =
+            BindingMode
+              .OneWay,
+         Action<
+               ContentPageWithLifecycle
+             , PropertyTypeT,
+               PropertyTypeT>
+            callbackAction =
+            null
+      )
+      {
+         return BindableUtils.CreateBindableProperty(localPropName, defaultVal, bindingMode, callbackAction);
       }
 
       /// <summary>
@@ -149,44 +179,6 @@
       /// </summary>
       public virtual void OnAppStarting()
       {
-      }
-
-      /// <summary>
-      ///    Finalizes an instance of the <see cref="ContentPageWithLifecycle" /> class.
-      /// </summary>
-      ~ContentPageWithLifecycle()
-      {
-         Dispose(false);
-      }
-
-      /// <summary>
-      ///    Creates the content page with lifecycle bindable property.
-      /// </summary>
-      /// <typeparam name="PropertyTypeT">The type of the property type t.</typeparam>
-      /// <param name="localPropName">Name of the local property.</param>
-      /// <param name="defaultVal">The default value.</param>
-      /// <param name="bindingMode">The binding mode.</param>
-      /// <param name="callbackAction">The callback action.</param>
-      /// <returns>BindableProperty.</returns>
-      public static BindableProperty CreateContentPageWithLifecycleBindableProperty<PropertyTypeT>
-      (
-         string localPropName,
-         PropertyTypeT
-            defaultVal =
-            default,
-         BindingMode
-            bindingMode =
-            BindingMode
-              .OneWay,
-         Action<
-               ContentPageWithLifecycle
-             , PropertyTypeT,
-               PropertyTypeT>
-            callbackAction =
-            null
-      )
-      {
-         return BindableUtils.CreateBindableProperty(localPropName, defaultVal, bindingMode, callbackAction);
       }
 
       /// <summary>
@@ -251,6 +243,14 @@
       private void ReleaseUnmanagedResources()
       {
          // TODO release unmanaged resources here
+      }
+
+      /// <summary>
+      ///    Finalizes an instance of the <see cref="ContentPageWithLifecycle" /> class.
+      /// </summary>
+      ~ContentPageWithLifecycle()
+      {
+         Dispose(false);
       }
    }
 }

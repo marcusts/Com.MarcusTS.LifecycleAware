@@ -1,10 +1,10 @@
 ﻿namespace Com.MarcusTS.LifecycleAware.Views.SubViews
 {
-   using System;
    using Com.MarcusTS.LifecycleAware.Common.Interfaces;
    using Com.MarcusTS.LifecycleAware.Common.Utils;
    using Com.MarcusTS.SharedForms.Common.Utils;
    using Com.MarcusTS.SharedUtils.Utils;
+   using System;
    using Xamarin.Forms;
 
    /// <summary>
@@ -119,6 +119,21 @@
       }
 
       /// <summary>
+      ///    Occurs when [page is disappearing].
+      /// </summary>
+      public event EventUtils.GenericDelegate<object> PageIsDisappearing;
+
+      /// <summary>
+      ///    Gets or sets the application lifecycle reporter.
+      /// </summary>
+      /// <value>The application lifecycle reporter.</value>
+      public IReportAppLifecycle AppLifecycleReporter
+      {
+         get => _appLifecycleReporter;
+         set => this.SetAppLifecycleReporter(ref _appLifecycleReporter, value);
+      }
+
+      /// <summary>
       ///    Gets or sets the content of the ContentView.
       /// </summary>
       /// <value>A <see cref="T:Xamarin.Forms.View" /> that contains the content.</value>
@@ -130,16 +145,6 @@
             base.Content = value;
             SetUpNewContent();
          }
-      }
-
-      /// <summary>
-      ///    Gets or sets the application lifecycle reporter.
-      /// </summary>
-      /// <value>The application lifecycle reporter.</value>
-      public IReportAppLifecycle AppLifecycleReporter
-      {
-         get => _appLifecycleReporter;
-         set => this.SetAppLifecycleReporter(ref _appLifecycleReporter, value);
       }
 
       /// <summary>
@@ -185,6 +190,36 @@
       {
          get => _stageLifecycleReporter;
          set => this.SetStageLifecycleReporter(ref _stageLifecycleReporter, value);
+      }
+
+      /// <summary>
+      ///    Creates the content view with lifecycle bindable property.
+      /// </summary>
+      /// <typeparam name="PropertyTypeT">The type of the property type t.</typeparam>
+      /// <param name="localPropName">Name of the local property.</param>
+      /// <param name="defaultVal">The default value.</param>
+      /// <param name="bindingMode">The binding mode.</param>
+      /// <param name="callbackAction">The callback action.</param>
+      /// <returns>BindableProperty.</returns>
+      public static BindableProperty CreateContentViewWithLifecycleBindableProperty<PropertyTypeT>
+      (
+         string localPropName,
+         PropertyTypeT
+            defaultVal =
+            default,
+         BindingMode
+            bindingMode =
+            BindingMode
+              .OneWay,
+         Action<
+               ContentViewWithLifecycle
+             , PropertyTypeT,
+               PropertyTypeT>
+            callbackAction =
+            null
+      )
+      {
+         return BindableUtils.CreateBindableProperty(localPropName, defaultVal, bindingMode, callbackAction);
       }
 
       /// <summary>
@@ -255,49 +290,6 @@
       }
 
       /// <summary>
-      ///    Finalizes an instance of the <see cref="ContentViewWithLifecycle" /> class.
-      /// </summary>
-      ~ContentViewWithLifecycle()
-      {
-         Dispose(false);
-      }
-
-      /// <summary>
-      ///    Occurs when [page is disappearing].
-      /// </summary>
-      public event EventUtils.GenericDelegate<object> PageIsDisappearing;
-
-      /// <summary>
-      ///    Creates the content view with lifecycle bindable property.
-      /// </summary>
-      /// <typeparam name="PropertyTypeT">The type of the property type t.</typeparam>
-      /// <param name="localPropName">Name of the local property.</param>
-      /// <param name="defaultVal">The default value.</param>
-      /// <param name="bindingMode">The binding mode.</param>
-      /// <param name="callbackAction">The callback action.</param>
-      /// <returns>BindableProperty.</returns>
-      public static BindableProperty CreateContentViewWithLifecycleBindableProperty<PropertyTypeT>
-      (
-         string localPropName,
-         PropertyTypeT
-            defaultVal =
-            default,
-         BindingMode
-            bindingMode =
-            BindingMode
-              .OneWay,
-         Action<
-               ContentViewWithLifecycle
-             , PropertyTypeT,
-               PropertyTypeT>
-            callbackAction =
-            null
-      )
-      {
-         return BindableUtils.CreateBindableProperty(localPropName, defaultVal, bindingMode, callbackAction);
-      }
-
-      /// <summary>
       ///    Disappears this instance.
       /// </summary>
       protected void Disappear()
@@ -347,6 +339,14 @@
          {
             IsCleaningUpBeforeFinalization = true;
          }
+      }
+
+      /// <summary>
+      ///    Finalizes an instance of the <see cref="ContentViewWithLifecycle" /> class.
+      /// </summary>
+      ~ContentViewWithLifecycle()
+      {
+         Dispose(false);
       }
    }
 }
